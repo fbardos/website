@@ -8,8 +8,6 @@ on:
 jobs:
   build-linux:
     runs-on: ubuntu-latest
-    strategy:
-    max-parallel: 5
     defaults:
       run:
         shell: bash -el {0}
