@@ -3,6 +3,8 @@ Date: 2023-04-10
 
 I use [Pelican](https://github.com/getpelican/pelican) as Static Site Generator to build this website. It allows a intuitive approach to write blog posts and other pages with markdown. Furthermore, I use the [Flex theme](https://github.com/alexandrevicenzi/Flex).
 
+You can find the source code of this website on [fbardos/website](https://github.com/fbardos/website).
+
 ## Installation
 
 The installation was quite easy. I started with the follwoing mamba/conda environment:
