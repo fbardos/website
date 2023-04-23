@@ -12,6 +12,7 @@ Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](http
 
 ## Contributing
 * [CKAN-QA](https://github.com/fbardos/ckan_qa): A framework to integrate GreatExpectations into the data pipeline of publishing data on CKAN.
+* Cycling around and update [OpenStreetMap](https://www.openstreetmap.org/) with [StreetComplete](https://streetcomplete.app/).
 * Generally, I like to collect open data and perform exploratory data anlysis on it later.
 
 ## Mail
