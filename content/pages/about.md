@@ -2,7 +2,7 @@ Title: About me
 Date: 2023-04-10
 Summary: Introducing myself.
 
-Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](https://www.openstreetmap.org/relation/1682243). I'm mainly code in [Python](http://python.org), sometimes in [R](r-project.org). I like cycling, cooking and reading books. Currently, I work for [Ergon Informatik AG](http://ergon.ch).
+Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](https://www.openstreetmap.org/relation/1682243). I mainly code in [Python](http://python.org), sometimes in [R](r-project.org). I like cycling, cooking and reading books. Currently, I work for the [City of Winterthur](https://stadt.winterthur.ch/).
 
 ## Like
 * [FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software): I'm deeply inspired by people spending their free time on a project and share it with the world. I truly believe this will make our world a better one.
