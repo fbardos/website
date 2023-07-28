@@ -38,7 +38,7 @@ Some charts contain aditional information for a clearer understanding. These opt
 ![section overview](../images/section_overview.png)
 
 The overview is built to give a visitor a quick overview of the data for the selected timeframe.
-Expected data quality: high, as long as the API data got updated every 3 minutes or more often.
+Expected data quality: medium (average trip distance) to high (scooters, trips), as long as the API data got updated every 10 minutes or more often.
 Besides a short introduction, there are 3 different KPIs:
 
 #### KPI: Scooters
@@ -88,6 +88,7 @@ Not good for answering question(s) like:
 ![section stationary scooters](../images/section_stationary.png)
 
 Contains charts for stationary data. Whenever a scooter is parked in a location, these are the charts they refer to.
+Expected data quality: high, as long as the API data got updated every 10 minutes or more often.
 
 #### Chart: Available scooter per provider
 ![chart scooter per provider](../images/chart_scooter_per_provider.png)
@@ -134,6 +135,7 @@ Not good for answering question(s) like:
 
 Contains charts for stationary data. Whenever a scooter is parked in a location, these are the charts they refer to.
 Expected data quality: medium. The following prerequisites must be fulfilled for a high data quality:
+
 * The data from tha API must be updated regularly (< 10 minutes). See section data quality for more information.
 * Scooter IDs must stay the same over time. When a scooter position data has a different scooter ID every time the scooter stands on a new location, trips cannot be calculated.
 
