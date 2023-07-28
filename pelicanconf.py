@@ -34,6 +34,10 @@ THEME_COLOR = 'dark'
 THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = False
 THEME_COLOR_ENABLE_USER_OVERRIDE = False
 
+# Use folder names as category
+USE_FOLDER_AS_CATEGORY = True
+DEFAULT_CATEGORY = 'general'
+
 # Static paths are needed to load images and favicon (under extra)
 # to the generated output html files.
 STATIC_PATHS= [
