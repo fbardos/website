@@ -1,6 +1,8 @@
 Title: E-Scooter Dashboard: Overview
 Date: 2023-07-28
 
+![Dashboard overview](../images/dashboard_overview.png)
+
 ## Dashboards
 * [Dashboard for the City of Winterthur, Switzerland](https://scooter.bardos.dev/public-dashboards/b9026fdfc46a44688708df83ffb80cf7)
 
@@ -8,8 +10,6 @@ Date: 2023-07-28
 * [Documentation transformation / Git repo](https://github.com/fbardos/shared_mobility_wthur)
 
 ## Dashboard
-![Dashboard overview](../images/dashboard_overview.png)
-
 The dashboard is built with [Grafana](https://grafana.com/) and is structured into 4 divisions:
 
 1. Overview: Gives an overview of the selected time window with KPIs.
@@ -133,7 +133,7 @@ Not good for answering question(s) like:
 ### Section 3: Moving Scooter
 ![section moving scooters](../images/section_moving.png)
 
-Contains charts for stationary data. Whenever a scooter is parked in a location, these are the charts they refer to.
+Contains charts for moving scooters, from calculated trips.
 Expected data quality: medium. The following prerequisites must be fulfilled for a high data quality:
 
 * The data from tha API must be updated regularly (< 10 minutes). See section data quality for more information.
@@ -212,6 +212,19 @@ Not good for answering question(s) like:
 ![section data quality](../images/section_data_quality.png)
 
 Contains chart who can give a general advice, how good the data quality for specific time windows is.
+
+#### Missing providers on charts
+Scooter provider `Bird` does change the scooter ID very often, so no paths can be calculated. The provider will be missing in most charts in the dashboard. For example, between 2023-07-04 and 2023-07-05, there were 110k different scooter IDs for the provider Bird. This means, when the provider has about 150 scooters in Winterthur, the scooter ID will change every 2 minutes.
+```bash
+ipdb> context_utils.data_interval_start
+    DateTime(2023, 7, 24, 2, 5, 0, tzinfo=Timezone('UTC'))
+ipdb> context_utils.data_interval_end
+    DateTime(2023, 7, 25, 2, 4, 59, 999999, tzinfo=Timezone('UTC'))
+ipdb> gdf[gdf['provider'] == 'Bird']['id'].nunique()
+    110508
+ipdb> gdf[gdf['provider'] == 'Bird']['id'].nunique() / (30*24)
+    153.48333333333332
+```
 
 #### Chart: Time since last update
 ![chart time since last update](../images/chart_time_since_last_update.png)
