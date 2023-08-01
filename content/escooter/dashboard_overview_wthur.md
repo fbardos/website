@@ -237,7 +237,6 @@ When the time difference rises for all the provider (and not just for one provde
 #### Chart: Age Scooter ID
 ![chart age scooter id](../images/chart_age_scooter_id.png)
 
-Shows the average age of a scooter over time. As long as the average age raises over time, the calculation of paths can be performed more correctly. When the average age of scooter stays the same or even decreases, this can be an indicator, that scooter trips cannot be performed correctly. In this case, the moving scooter section has be looked ad with caution.
-
+Shows the average age of the scooters, grouped by provider. The values are displayed as index with base = 100% for the beginning of the time window. As long as the average age raises over time, this indicates, that the scooter IDs do not change very often. In this case, the calculation of paths can be performed more correctly. When the average age of scooter stays the same or even decreases, this can be an indicator, that scooter trips cannot be performed correctly. In this case, the moving scooter section has be looked ad with caution. When the time window selection ends on the current day, scooter ID age can suddenly drop. This is because of the limited datapoints at the last performed data calculation at 02:05 UTC.
 
 
