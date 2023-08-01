@@ -106,15 +106,16 @@ Not good for answering question(s) like:
 #### Chart: Staying duration per day
 ![chart staying duration](../images/chart_staying_duration.png)
 
-Shows the average duration, how long a scooter was staying in on position, on a 1 day time time window. The end time of a standing scooter is crucial do termine, to which day the staying duration is added to. Terefore, the average staying duration can be longer than one day, when a scooter gets moved again, after the scooter was standing still for e.g. 32 hours.
+Shows the average duration, a scooter stays on the same position in bins of 24 hours. A bin starts at 00:00 and ends at 23:59:59. The lower the value, the more active the scooters of this provider is. The avarage is only calculated for scooters, whose ID was first first seen before time bin and last seen after time bin.
+In reality, scooter staying duration should be higher. But because data gets collected every 2 minutes, scooters which get used alot will add some time uncertanty at begining and end of a trip and therefore show lower staying durations.
 
 Good for answering question(s) like:
 
-* How long are scooters stationary on average and per provider?
+* How many hours of the day is a scooter not moving?
 
 Not good for answering question(s) like:
 
-* How many hours of the day is a scooter not moving?
+* How long are scooters stationary on average and per provider?
 
 #### Map: Stationary Scooter Position
 ![chart stationary scooter position](../images/chart_stationary_scooter_position.png)
