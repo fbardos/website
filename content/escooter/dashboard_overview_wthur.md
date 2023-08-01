@@ -107,7 +107,7 @@ Not good for answering question(s) like:
 ![chart staying duration](../images/chart_staying_duration.png)
 
 Shows the average duration, a scooter stays on the same position in bins of 24 hours. A bin starts at 00:00 and ends at 23:59:59. The lower the value, the more active the scooters of this provider is. The avarage is only calculated for scooters, whose ID was first first seen before time bin and last seen after time bin.
-In reality, scooter staying duration should be higher. But because data gets collected every 2 minutes, scooters which get used alot will add some time uncertanty at begining and end of a trip and therefore show lower staying durations.
+In reality, scooter staying duration can differ. Data gets collected every 2 minutes, so real start/stop of staying times can be blurry.
 
 Good for answering question(s) like:
 
