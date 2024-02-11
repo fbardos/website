@@ -1,4 +1,4 @@
-Title: about
+Title: About
 Date: 2023-04-10
 Summary: Introducing myself.
 
