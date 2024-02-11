@@ -3,7 +3,7 @@ import datetime as dt
 
 AUTHOR = 'Fabian Bardos'
 SITENAME = 'Fabian Bardos'
-SITEURL = ''
+SITEURL = 'http://bardos.dev'
 
 # Set avatar and headings below
 SITETITLE = 'Fabian Bardos'
@@ -22,7 +22,7 @@ DISABLE_URL_HASH = True
 DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
+FEED_ALL_ATOM = 'atom.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
