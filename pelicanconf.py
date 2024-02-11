@@ -55,7 +55,7 @@ SOCIAL = (
     ('github', 'https://github.com/fbardos'),
     ('stack-overflow', 'https://stackoverflow.com/users/4856719/fbardos'),
     ('mastodon', 'https://mastodon.social/@eschi'),
-    ('atom', 'https://bardos.dev/atom.xml'),
+    ('rss', 'https://bardos.dev/atom.xml'),
 )
 
 # static paths will be copied without parsing their contents
