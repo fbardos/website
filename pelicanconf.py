@@ -3,7 +3,7 @@ import datetime as dt
 
 AUTHOR = 'Fabian Bardos'
 SITENAME = 'Fabian Bardos'
-SITEURL = 'http://bardos.dev'
+SITEURL = 'https://bardos.dev'
 
 # Set avatar and headings below
 SITETITLE = 'Fabian Bardos'
