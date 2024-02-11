@@ -4,10 +4,8 @@ Slug: ktzh-downloads
 
 ![Statistics Thumbnail](../images/ktzh_thumbnail.png)
 
-## App
+## Links
 * [Link to Statistics App](https://ktzh.bardos.dev)
-
-## Reference
 * [Git repo](https://github.com/fbardos/ktzh_ogd_statistics)
 
 After my [last post](https://bardos.dev/tags-network.html) creating a network graph for the Open Data listed on [opendata.swiss](http://opendata.swiss) with [Gephi](https://gephi.org/), I searched for a solution to automatically create a nice looking graph. Luckily, I found a solution with:
