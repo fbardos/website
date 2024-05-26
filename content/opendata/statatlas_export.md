@@ -6,6 +6,7 @@ Slug: statatlas-export
 
 These days, I find it difficult to compare different municipalities with eachother.
 The Federal Statistical Office (BFS) does publish many data, but it is hard to collect various data from
+
 * a) each municipality in Swizterland (location)
 * b) over multiple years (time)
 * c) over multiple indicators (scope)
@@ -19,6 +20,7 @@ And indeed, the data published on STATATLAS is also listed on this api:
 curl --location --request GET 'https://dam-api.bfs.admin.ch/hub/api/dam/assets?articleModel=900052&spatialdivision=900004'
 ```
 Whereas
+
 * `articleModel=900052` stands for the STATATLAS product
 * and `spatialdivision=900004` stands for data on municipality level
 
