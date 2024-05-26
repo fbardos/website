@@ -3,7 +3,7 @@ import datetime as dt
 
 AUTHOR = 'Fabian Bardos'
 SITENAME = 'Fabian Bardos'
-SITEURL = ''
+SITEURL = 'https://bardos.dev'
 
 # Set avatar and headings below
 SITETITLE = 'Fabian Bardos'
@@ -22,7 +22,8 @@ DISABLE_URL_HASH = True
 DEFAULT_LANG = 'en'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
+FEED_DOMAIN = SITEURL
+FEED_ALL_ATOM = 'atom.xml'
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
@@ -54,7 +55,7 @@ SOCIAL = (
     ('github', 'https://github.com/fbardos'),
     ('stack-overflow', 'https://stackoverflow.com/users/4856719/fbardos'),
     ('mastodon', 'https://mastodon.social/@eschi'),
-    # ('envelope', 'mailto:fabian@bardos.dev'),
+    ('rss', 'https://bardos.dev/atom.xml'),
 )
 
 # static paths will be copied without parsing their contents

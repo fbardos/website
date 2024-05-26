@@ -4,10 +4,8 @@ Slug: tags-network
 
 ![Network Thumbnail](../images/tags_graph_thumbnail.png)
 
-## App
+## Links
 * [Link to Tags Network on Streamlit](https://opendata-swiss-tags.streamlit.app/)
-
-## Reference
 * [Git repo](https://github.com/fbardos/opendata_swiss)
 
 ## Create Graph

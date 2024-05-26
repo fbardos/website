@@ -1,4 +1,4 @@
-Title: About me
+Title: About
 Date: 2023-04-10
 Summary: Introducing myself.
 
@@ -7,8 +7,7 @@ Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](http
 ## Like
 * [FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software): I'm deeply inspired by people spending their free time on a project and share it with the world. I truly believe this will make our world a better one.
 * [Open (Government) Data](https://en.wikipedia.org/wiki/Open_data): Open Data empowers innovation, is the foundation for discussions based on facts.
-* [Linux](http://kernel.org): Started with OpenSuse in 2006, currently on Ubuntu. Linux is exactly one year younger than me (but obviously alot bigger).
-
+* [Linux](http://kernel.org): Started with OpenSuse in 2006, currently on Ubuntu. Linux is exactly one year younger than me (but obviously alot bigger). You can find my development environment [here](https://github.com/fbardos/devenv).
 
 ## Contributing
 * [CKAN-QA](https://github.com/fbardos/ckan_qa): A framework to integrate GreatExpectations into the data pipeline of publishing data on CKAN.
