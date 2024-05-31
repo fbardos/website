@@ -25,7 +25,7 @@ In this post I will explain how I downloaded all the data from STATATLAS in two 
 
 **Loaded rows**
 
-2'134'923
+2'134'923 (only municipalities)
 
 **Links**
 
@@ -92,7 +92,7 @@ This data can then loaded e.g. into a database to perform transformations and an
 
 **Loaded rows**
 
-5'040'141
+5'040'141 (all)
 
 **Links**
 
