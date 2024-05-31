@@ -23,6 +23,10 @@ In this post I will explain how I downloaded all the data from STATATLAS in two 
 
 ## Approach 1: Use DAM-API to search for datasets related to STATATLAS
 
+**Loaded rows**
+
+2'134'923
+
 **Links**
 
 * [Python script](https://github.com/fbardos/homelab_elt/blob/main/homelab_airflow/dags/bfs_statatlas/run_bfs_statatlas.py)
@@ -85,6 +89,10 @@ memory usage: 276.9+ MB
 This data can then loaded e.g. into a database to perform transformations and analysis downstream.
 
 ## Approach 2: Brute force download URL
+
+**Loaded rows**
+
+5'040'141
 
 **Links**
 
