@@ -9,7 +9,7 @@ Slug: tags-network
 * [Git repo](https://github.com/fbardos/opendata_swiss)
 
 ## Create Graph
-The network itself is created with [Gephi](https://gephi.org/). I get the data from my [daily snapshots](https://github.com/fbardos/opendata_swiss/blob/6a89519950e15532bc79b68fbcc4e55c10f923cf/dag_opendata_swiss.py) of CKAN packages from [opendata.swiss](https://opendata.swiss). But you can also collect the currently available packages from the [CKAN API](https://handbook.opendata.swiss/de/content/nutzen/api-nutzen.html).
+The network itself is created with [Gephi](https://gephi.org/). I get the data from my [daily snapshots](https://github.com/fbardos/opendata_swiss/blob/6a89519950e15532bc79b68fbcc4e55c10f923cf/dag_opendata_swiss.py) of CKAN packages from [opendata.swiss](https://opendata.swiss). An export (uncompressed 73 GB in size) for the time period `2022-08-26` until `2024-05-31` can be found [here](https://cloud.bardos.dev/s/qK3kPZMDTkdLbkW). But you can also collect the currently available packages from the [CKAN API](https://handbook.opendata.swiss/de/content/nutzen/api-nutzen.html).
 
 ### Collect Data
 Data is collected and exported to CSV via a [custom script](https://github.com/fbardos/opendata_swiss/blob/9640a78834170a4ec168411778c71e28972b7448/gephi/build_nodes_edges.py).
