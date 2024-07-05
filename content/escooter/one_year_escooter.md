@@ -22,11 +22,11 @@ I have now published 10 dashboards for the cities and regions with available sco
 
 Some key figures:
 
-| time range | `2022-10-16` until `203-11-15` |
-| collected every | 2 minutes |
-| datapoints | 2'800'000'000 |
-| Storage datapoints | 327 GB (MongoDB)  |
-| Storage processed data | 38.1 GB (PostGIS)  |
+* time range: `2022-10-16` until `203-11-15`
+* collected every 2 minutes
+* datapoints: 2'800'000'000
+* required storage datapoints: 327 GB (MongoDB)
+* required storage processed data: 38.1 GB (PostGIS)
 
 ## Processing of the data
 
@@ -51,6 +51,6 @@ Fortunately, many tasks can be run in parallel, which speeds up the execution si
 
 Nodes and Edges for the Network Graph get imported from [OpenStreetMap](https://www.openstreetmap.org/) with the help of the Python package [osmnx](https://pypi.org/project/osmnx/). The Network is needed to then calculate possible routes from one GPS location to the next of one single scooter.
 
-## Reference
+## See also
 * [Original post for Winterthur describing the dashboards](https://bardos.dev/e-scooter-dashboard-overview.html)
 * [Documentation transformation / Git repo](https://github.com/fbardos/shared_mobility_wthur)
