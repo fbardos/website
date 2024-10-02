@@ -4,7 +4,16 @@ Date: 2023-07-28
 ![Dashboard overview](../images/dashboard_overview.png)
 
 ## Dashboards
-* [Dashboard for the City of Winterthur, Switzerland](https://scooter.bardos.dev/public-dashboards/b9026fdfc46a44688708df83ffb80cf7)
+* [Zurich, Switzerland](https://grafana.bardos.dev/public-dashboards/b6f7b7c275d747359dcb6602859a5df0)
+* [Basel, Switzerland](https://grafana.bardos.dev/public-dashboards/094c36477d3d4de286e29a247ae083d4)
+* [Bern, Switzerland](https://grafana.bardos.dev/public-dashboards/d3d593f0575844a9a5cd55053b2bf07a)
+* [Winterthur, Switzerland](https://grafana.bardos.dev/public-dashboards/773b4473fea14b5eaa464a3d5d7d46d8)
+* [St.Gallen, Switzerland](https://grafana.bardos.dev/public-dashboards/2cc3ba30e84c43938f7db016218c7de7)
+* [Biel/Bienne, Switzerland](https://grafana.bardos.dev/public-dashboards/be04a0072eef47c8b0ca34baa0899153)
+* [Uster, Switzerland](https://grafana.bardos.dev/public-dashboards/e6f8513db2b8405dafbe9f636d4e4ce8)
+* [Frauenfeld, Switzerland](https://grafana.bardos.dev/public-dashboards/a185c2532b2c4bcaac97188dc5daede3)
+* [Effretikon, Switzerland](https://grafana.bardos.dev/public-dashboards/b11e30f31a864fc29547c1109f98f145)
+* [Grenchen, Switzerland](https://grafana.bardos.dev/public-dashboards/06877745c3714e3d80f613cc69e3e7d5)
 
 ## Reference
 * [Documentation transformation / Git repo](https://github.com/fbardos/shared_mobility_wthur)
