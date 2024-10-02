@@ -23,7 +23,7 @@ Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](http
 ])
 ```
 
-PGP:
+PGP (ed25519):
 
 ```text
 -----BEGIN PGP PUBLIC KEY BLOCK-----
