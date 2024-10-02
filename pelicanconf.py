@@ -48,7 +48,10 @@ STATIC_PATHS= [
 
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
+    "extra/custom.css": {"path": "static/custom.css"},
 }
+
+CUSTOM_CSS = "static/custom.css"
 
 # Social widget
 SOCIAL = (
