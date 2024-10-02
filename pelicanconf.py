@@ -29,6 +29,9 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+# Change date format to ISO-8601
+DEFAULT_DATE_FORMAT = '%Y-%m-%d'
+
 # THEME
 THEME = 'refs/Flex'
 THEME_COLOR = 'dark'
