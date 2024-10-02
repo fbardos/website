@@ -1,10 +1,11 @@
 Title: Mass export data from STATATLAS
 Date: 2024-05-26
+Modified: 2024-10-02
 Slug: statatlas-export
 
 ![STATATLAS Thumbnail](../images/statatlas_thumbnail.png)
 
-These days, I find it difficult to compare different municipalities with eachother.
+I find it difficult to compare different municipalities with eachother in Switzerland.
 The Federal Statistical Office (BFS) does publish many data, but it is hard to collect various data from
 
 * a) each municipality in Swizterland (location)
@@ -16,10 +17,11 @@ This is exactly the data I searched for, because it allows a broad overview over
 According to the BFS, there is currently no possibility to download all the STATATLAS data at once.
 To download multiple yars for one indicator, I had to click on the download button for each year for this one indicator.
 
-In this post I will explain how I downloaded all the data from STATATLAS in two approaches:
+In this post I will explain how I downloaded all the data from STATATLAS in 3 different approaches:
 
 * Approach 1: Use DAM-API to search for datasets related to STATATLAS
 * Approach 2: Brute force download URL
+* Approach 3: Use `structure.json`
 
 ## Approach 1: Use DAM-API to search for datasets related to STATATLAS
 
@@ -88,6 +90,10 @@ memory usage: 276.9+ MB
 
 This data can then loaded e.g. into a database to perform transformations and analysis downstream.
 
+Cons:
+
+* Some data is missing.
+
 ## Approach 2: Brute force download URL
 
 **Loaded rows**
@@ -119,8 +125,63 @@ From approach 1, the highest map ID was 27642.
 This is surely not an optimal solution, because...
 
 * it sends a lot of requests to the backend from the BFS to download the data
-* the duration of the task is significantly longer (40 vs. 7 minutes) than using the DAM API
+* the duration of the task is significantly longer (70 vs. 7 minutes) than using the DAM API
 
-But it is currently the only solution to download all the data as far as I can see.
+## Approach 3: Use structure.json
 
-If you find a cleaner way to download the STATATLAS data let me know.
+**Loaded rows**
+
+5'222'043 (all)
+
+**Links**
+
+* Dagster Asset: TODO
+
+For some weeks, I continued to use approach 2. But I saw multiple new data with the same variable name for different variables.
+One example:
+
+* [STATATLAS: Amount of workers in Retail, 2022](https://www.atlas.bfs.admin.ch/maps/13/de/18030_9084_9075_138/27833.html)
+* [STATATLAS: Amount of workers in Chemicals and Pharma, 2022](https://www.atlas.bfs.admin.ch/maps/13/de/18028_9080_9075_138/27829.html)
+
+Both have the variable name `Anzahl Beschäftigte in Vollzeitäquivalenten` in their CSV exports.
+I know, it is a bad idea to treat a variable string as ID, but it was the only possibility with the above approaches, when I want to combine multiple years together.
+
+So I was looking for another solution. Also, because I was sending a lot of requests to the BFS.
+When observing the network request during visiting one of the maps, I found some interesting JSON files:
+
+```text
+https://www.atlas.bfs.admin.ch/json/13/project.json
+  Containing some information about the STATATLAS itself.
+
+https://www.atlas.bfs.admin.ch/json/design/1.json
+  Settings about the appearance of STATATLAS.
+
+https://www.atlas.bfs.admin.ch/json/language/131.json
+  Some translations in German.
+
+https://www.atlas.bfs.admin.ch/json/projects.json
+  Lists the BFS products which are included in STATATLAS.
+
+https://www.atlas.bfs.admin.ch/json/13/patterns/<MAP_ID>.json
+  Containing the hierarchy path of a map.
+
+https://www.atlas.bfs.admin.ch/json/13/structures/<STRUCTURE_ID>.json          <---
+  Lists the current hierarchy name (in DE and FR), its name and its children.
+  When the hierarchy is deep enough, it will list the maps in the key `info`.
+  The root structure is `STRUCTURE_ID = 2857`
+
+https://www.atlas.bfs.admin.ch/json/13/maps/<MAP_ID>.json
+  Information about a specific map for the presentation in STATATLAS.
+
+https://www.atlas.bfs.admin.ch/json/13/labels/<GEO_REF>.json
+  Labels for geographic areas like municipalities.
+
+https://www.atlas.bfs.admin.ch/json/13/data/<MAP_ID>.json
+  Containing the data of the map for the tabluar view in STATATLAS.
+```
+
+For me, the structures/ endpoint is interesting for me.
+When recursively load all childrens, I could get all the maps referenced with the root and even get a structure of the topics to better distinguish indicators.
+No need to brute force map IDs anymore.
+
+
