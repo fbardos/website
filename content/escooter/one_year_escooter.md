@@ -22,7 +22,7 @@ I have now published 10 dashboards for the cities and regions with available sco
 
 Some key figures:
 
-* time range: `2022-10-16` until `203-11-15`
+* time range: `2022-10-16` until `2023-11-15`
 * collected every 2 minutes
 * datapoints: 2'800'000'000
 * required storage datapoints: 327 GB (MongoDB)
