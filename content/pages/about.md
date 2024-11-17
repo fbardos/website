@@ -2,7 +2,7 @@ Title: About
 Date: 2023-04-10
 Summary: Introducing myself.
 
-Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](https://www.openstreetmap.org/relation/1682243). I mainly code in [Python](http://python.org), sometimes in [R](r-project.org). I like cycling, cooking and reading books. Currently, I work for the [City of Winterthur](https://stadt.winterthur.ch/).
+Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](https://www.openstreetmap.org/relation/1682243). I mainly code in [Python](http://python.org), like cycling, cooking and reading books. Currently, I work for the [City of Winterthur](https://stadt.winterthur.ch/).
 
 ## Like
 * [FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software): I'm deeply inspired by people spending their free time on a project and share it with the world. I truly believe this will make our world a better one.
@@ -10,7 +10,7 @@ Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](http
 * [Linux](http://kernel.org): Started with OpenSuse in 2006, currently on Ubuntu. Linux is exactly one year younger than me (but obviously alot bigger). You can find my development environment [here](https://github.com/fbardos/devenv).
 
 ## Contributing
-* [CKAN-QA](https://github.com/fbardos/ckan_qa): A framework to integrate GreatExpectations into the data pipeline of publishing data on CKAN.
+* [ODAPI](https://github.com/fbardos/odapi): An API to get curated Swiss Open Data for municipalities, districts and cantons.
 * Cycling around and update [OpenStreetMap](https://www.openstreetmap.org/) with [StreetComplete](https://streetcomplete.app/).
 * Generally, I like to collect open data and perform exploratory data anlysis on it later.
 
