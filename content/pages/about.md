@@ -9,8 +9,11 @@ Hi, my name is Fabian and I'm a Data Analyst from [Winterthur, Switzerland](http
 * [Open (Government) Data](https://en.wikipedia.org/wiki/Open_data): Open Data empowers innovation, is the foundation for discussions based on facts.
 * [Linux](http://kernel.org): Started with OpenSuse in 2006, currently on Ubuntu. Linux is exactly one year younger than me (but obviously alot bigger). You can find my development environment [here](https://github.com/fbardos/devenv).
 
-## Contributing
+## Maintaining
 * [ODAPI](https://github.com/fbardos/odapi): An API to get curated Swiss Open Data for municipalities, districts and cantons.
+* [ktzh_ogd_statistics](https://github.com/fbardos/ktzh_ogd_statistics): Download Statistics for open data in the Canton of Zurich.
+
+## Contributing
 * Cycling around and update [OpenStreetMap](https://www.openstreetmap.org/) with [StreetComplete](https://streetcomplete.app/).
 * Generally, I like to collect open data and perform exploratory data anlysis on it later.
 
