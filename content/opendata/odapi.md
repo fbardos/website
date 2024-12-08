@@ -1,5 +1,5 @@
 Title: Open Data API for Switzerland
-Date: 2024-12-18
+Date: 2024-12-08
 Slug: odapi
 
 ![Dagster Data Lineage Graph](../images/thumbnail_dagster.png)
