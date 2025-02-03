@@ -51,7 +51,7 @@ STATIC_PATHS= [
 ]
 
 MENUITEMS = (
-    ('gists', 'https://bardos.dev/gists'),
+    ("gists", "/gists/"),
 )
 
 EXTRA_PATH_METADATA = {
