@@ -50,6 +50,10 @@ STATIC_PATHS= [
     'gists',
 ]
 
+MENUITEMS = (
+    ('gists', 'https://bardos.dev/gists'),
+)
+
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     "extra/custom.css": {"path": "static/custom.css"},
