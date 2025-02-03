@@ -1,0 +1,12 @@
+To read the current power consumption on my system76 laptop, there
+is currently no file called /sys/class/power_supply/BAT0/power_now.
+
+To read the consumption on the battery, use the following instead:
+
+    $ cat /sys/class/power_supply/BAT0/current_now /sys/class/power_supply/BAT0/voltage_now \
+	| xargs \
+	| awk '{print $1*$2/1e12}'
+
+Remarks:
+  - Will print the current power consumption in Watts
+  - Will not work when battery is not used (when on AC)

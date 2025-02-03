@@ -1,0 +1,21 @@
+When installing Teamspeak 3 on Ubuntu, move the unzipped archive to:
+
+    $ mv ~/Downloads/teamspeak-client /usr/local
+
+Then add a dmenu [1] entry on a new file 
+
+    $ touch ~/.local/share/applications/teamspeak.desktop
+
+With the following content:
+
+	[Desktop Entry]
+	Name=TeamSpeak 3
+	Comment=TeamSpeak 3 VoIP Communicator
+	Exec=/usr/local/teamspeak-client/TeamSpeak
+	Terminal=false
+	Type=Application
+	Categories=Network;Application;
+	Icon=/usr/local/teamspeak-client/logo-128.png
+
+Reference: 
+  [1] https://tools.suckless.org/dmenu/
