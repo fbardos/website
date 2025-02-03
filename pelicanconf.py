@@ -50,8 +50,9 @@ STATIC_PATHS= [
     'gists',
 ]
 
-MAIN_MENU = True
-MENUITEMS = (
+MAIN_MENU = False
+LINKS_IN_NEW_TAB = True
+LINKS = (
     ("gists", "/gists/"),
 )
 
