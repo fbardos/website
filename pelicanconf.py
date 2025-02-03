@@ -50,6 +50,7 @@ STATIC_PATHS= [
     'gists',
 ]
 
+MAIN_MENU = True
 MENUITEMS = (
     ("gists", "/gists/"),
 )
