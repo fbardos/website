@@ -47,6 +47,7 @@ DEFAULT_CATEGORY = 'general'
 STATIC_PATHS= [
     'images',
     'extra',
+    'gists',
 ]
 
 EXTRA_PATH_METADATA = {

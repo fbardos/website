@@ -1,0 +1,4 @@
+Migrate a MongoDB collection from one instance to another, over network and with compression:
+
+mongoexport --collection <col> --db <db> --uri "mongodb://<user>:<password>@<host>:<port>/?authSource=admin&readPreference=primary&ssl=false&directConnection=true" 2> log_mongoexport.txt  | bzip2 | ssh <ssh-alias> "bzip2 -dc | mongoimport --drop --collection <col> --db <db> --uri 'mongodb://<user>:<password>@<host>:<port>/?authSource=admin&readPreference=primary&ssl=false&directConnection=true'"
+
