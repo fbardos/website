@@ -1,0 +1,67 @@
+I was looking for a solution to manager power settings on Ubuntu with i3wm [1].
+
+Battery Life
+============
+
+For an optimal batterly life, I choose tlp [2]:
+  
+  Popularity: https://qa.debian.org/popcon.php?package=tlp
+
+Install with:
+
+  $ sudo apt install tlp tlp-rdw
+
+Then enable the service:
+
+  $ sudo systemctl enable tlp
+  $ sudo systemctl start tlp
+
+
+Suspend timing
+==============
+
+A simple bash script on managing the power options should do the work.
+Create the file ~/.config/i3/scripts/power_manage.sh:
+
+  #!/bin/bash
+  
+  # Check if system is on AC power
+  POWER_STATUS=$(cat /sys/class/power_supply/AC/online)
+  
+  if [ "$POWER_STATUS" -eq 1 ]; then
+      # On AC power: Longer timeout
+      
+      # Display: standby, suspend, off - in seconds, 0 for disabling
+      xset dpms 600 1200 1800
+  
+      # Disable sleep/suspend/hibernate
+      systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+  
+  else
+      # On Battery: Shorter timeout to save power
+      
+      # Display: standby, suspend, off - in seconds, 0 for disabling
+      xset dpms 300 600 900
+
+      # Reenable sleep/suspend/hibernate
+      systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+  fi
+
+
+Then enable execution of ~/.config/i3/scripts/power_manage.sh:
+
+  $ chmod +x ~/.config/i3/scripts/power_manage.sh
+
+Finally, add execution of script on ~/.config/i3/config:
+
+  # Monitor for power status changes every 30 seconds (using watch command)
+  exec --no-startup-id watch -n 30 ~/.config/i3/power_manage.sh
+
+Reload the i3 config:
+
+  $ i3-msg restart
+
+
+Reference:
+  [1] https://i3wm.org/
+  [2] https://linrunner.de/tlp/
