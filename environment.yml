@@ -1,5 +1,0 @@
-name: website
-dependencies:
-  - python=3.10.*
-  - "pelican[markdown]"
-  - markdown

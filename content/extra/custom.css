@@ -2,3 +2,12 @@ body {
     font-family: monospace;
     line-height: 1.5;
 }
+
+main article blockquote, main article pre {
+    border: none;
+}
+
+main article :not(pre)>code{
+    background-color: #413939;
+    border-color: #413939;
+}
