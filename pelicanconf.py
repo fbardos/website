@@ -51,7 +51,7 @@ STATIC_PATHS= [
 ]
 
 MAIN_MENU = False
-LINKS_IN_NEW_TAB = True
+LINKS_IN_NEW_TAB = False
 LINKS = (
     ("gists", "/gists/"),
 )

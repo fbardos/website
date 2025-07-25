@@ -8,6 +8,6 @@ main article blockquote, main article pre {
 }
 
 main article :not(pre)>code{
-    background-color: #413939;
-    border-color: #413939;
+    background-color: #292020;
+    border-color: #292020;
 }
