@@ -29,4 +29,4 @@ Hi, my name is Fabian and I'm a Data Engineer from [Winterthur, Switzerland](htt
 ## PGP
 * [Public key file](../gists/public_key.asc)
 * Fingerprint `11910d8228ecca5ae88ede317e8e9e61a3dcb529`
-* Uploaded on [Ubuntu Key Server](https://keyserver.ubuntu.com/pks/lookup?op=vindex&search=0x7e8e9e61a3dcb529)
+* Uploaded on [Ubuntu Key Server](https://keyserver.ubuntu.com/pks/lookup?op=vindex&search=0x7e8e9e61a3dcb529) and [OpenPGP Key Server](https://keys.openpgp.org/search?q=11910d8228ecca5ae88ede317e8e9e61a3dcb529)
