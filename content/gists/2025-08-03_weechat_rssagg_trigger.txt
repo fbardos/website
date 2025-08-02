@@ -1,0 +1,79 @@
+I recently integrated my preferred RSS feeds into WeeChat [1].
+This can be done by loading the script rssagg.pl [2].
+
+One problem I have is that I don't want to look at the differnt
+RSS feeds at the same time. For example, I don't want to check
+news headlines that often, because they are often not really that
+relevant for my life. But I want to read new articles from blogs 
+I like on a daily basis.
+
+As far as I can tell, there is only one buffer for all RSS feeds.
+So, I was searching for a solution to create different buffers for
+different RSS feeds, which I can then check on different occasions.
+
+With triggers [3], it is possible to catch new entries from RSS feeds,
+and print them in a different buffer.
+
+My RSS feeds have the same structure:
+
+  - Prefix blog-
+      Blogs I find interesting. Check daily.
+  - Prefix orgs-
+      Organisations I want to follow. Check weekly.
+  - Prefix news-
+      For newspapers and other news. Check seldom.
+
+I configured the new trigger with:
+
+```
+1: /trigger add rssagg-news print "perl.rssagg"
+2: /trigger set rssagg-news conditions "${tg_prefix_nocolor} =~ ^#news-"
+3: /trigger set rssagg-news command "/print -newbuffer rssagg-news ${tg_prefix} \t ${tg_message}"
+```
+
+Line 1 registers the trigger. and gives it the name `rssagg-news`.
+I specify the hook `print` and the target buffer, I want to 
+watch with `perl.rssagg`. A list with the full name of the
+buffers can be listed in WeeChat with `/buffer list`.
+
+Line 2 adds a condition, when to fire the trigger. In the
+above example, I select only lines with the prefix `#news-`.
+The available variables, which get passed to the condition can
+be observed when enabling the debug buffer with `/trigger monitor`.
+I can see something like:
+
+  print: rssagg-news (perl.rssagg)
+    buffer: perl.rssagg
+    pointers:
+      buffer: 0x55a5129020
+    extra_vars:
+      tg_trigger_name: "rssagg-news"
+      tg_hook_type: "print"
+      tg_date: "2025-08-03T00:31:33.178977"
+      tg_displayed: "1"
+      tg_highlight: "0"
+      tg_prefix: "#news-nyt-world"
+      tg_prefix_nocolor: "#news-nyt-world"
+      tg_message: "Derk Sauer, Champion of Free Press in a New Russia, Dies at 72 https://www.nytimes.com/2025/08/01/world/europe/derk-sauer-dead.html"
+      tg_message_nocolor: "Derk Sauer, Champion of Free Press in a New Russia, Dies at 72 https://www.nytimes.com/2025/08/01/world/europe/derk-sauer-dead.html"
+      tg_tags_count: "0"
+    running command "/print -newbuffer rssagg-news #news-nyt-world \tDerk Sauer, Champion of Free Press in a New Russia, Dies at 72
+  https://www.nytimes.com/2025/08/01/world/europe/derk-sauer-dead.html" on buffer perl.rssagg
+
+When working with tags, you can see the tags for each line when
+enabling it wit `/debug tags`.
+
+In Line 3, I then specify wich command to run for every message
+received from the rssagg.pl script. I print them to a new (or existing)
+buffer named `rssagg-news`. The last arguemnt of the print statement
+specifies the content itself to print. I first print the prefix and
+tell WeeChat to separate the prefix from the message with `\t`. Last
+but not least comes the article title from the RSS feed itself.
+
+Now, whenever rssagg.pl catches a new article from one of the feeds
+with the correct prefix, they also get copied to the registered buffers
+which I then can consume when I like.
+
+[1] https://weechat.org/
+[2] https://weechat.org/scripts/source/rssagg.pl.html/
+[3] https://weechat.org/files/doc/stable/weechat_user.en.html#trigger
