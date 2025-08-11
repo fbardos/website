@@ -1,0 +1,38 @@
+Vim replace selection
+---------------------
+
+When replacing a long string in VIM, instead of typing a long regex,
+just execute:
+
+  1. NORMAL MODE: Select the string you want to replace and hit `*` 
+     to search for all the occurences in the file.
+  2. Init sed and leave the first argument empty. When the first
+     argument is not provided, VIM will take the perviously made
+     selection as the first argument:
+     
+     :%s//REPLACE_TEXT/
+
+  3. Hit ENTER
+
+
+Yank to register
+----------------
+
+Put the words/lines you want to keep for multiple occasions in a
+register (check wich `:registers`).
+E.g. if you want to put this and the next 2 lines into register `a`:
+
+  "ay2j
+
+, where:
+  - `"a` init register a
+  - `y2j` yank this and the next 2 lines
+
+Then, paste the register anywhere with:
+
+  "ap
+
+, where:
+  - `"a` select register a
+  - `p` paste
+
