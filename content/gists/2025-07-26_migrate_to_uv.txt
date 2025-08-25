@@ -1,12 +1,22 @@
-When a requirements.txt file is available (but no pyproject.toml):
+When a requirements.txt file is available
+(but no pyproject.toml):
 
   $ uv venv
 
 ... will create the corresponding .venv directory.
 
-When a different python version is specified in `.python-version` then installed as base,
-the corresponding python version will be downloaded automatically.
+When a different python version is specified in `.python-version`
+then installed as base, the corresponding python version will
+be downloaded automatically.
 
 After this, install the dependencies with:
+
+  $ uv add -r requirements.txt
+
+This will install the dependencies and
+update `pyproject.toml` and `uv.lock`.
+
+If you only want to install the dependencies in
+requirements.txt, then run:
 
   $ uv pip install -r requirements.txt
