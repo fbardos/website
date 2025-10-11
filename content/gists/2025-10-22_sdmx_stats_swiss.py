@@ -50,3 +50,6 @@ dim_gkats.local_representation.enumerated.items
 # DATA --------------------------------------------------------------------------------
 # Get data for Winterthur
 sdmx.to_pandas(client.data('DF_GWS_REG1', key='A...230', params=dict(startPeriod=2010)))
+
+# Get data for all geos (6 GB of RAM needed, pandas.DataFrame size 33 MB)
+df = sdmx.to_pandas(client.data('DF_GWS_REG1', key='A....', params=dict(startPeriod=2010)))
