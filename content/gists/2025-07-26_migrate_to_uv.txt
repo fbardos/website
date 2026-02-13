@@ -20,3 +20,25 @@ If you only want to install the dependencies in
 requirements.txt, then run:
 
   $ uv pip install -r requirements.txt
+
+---
+
+And inside the projects Dockerfile:
+
+To bake uv binaries into the docker image:
+
+  $ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+During deployment, do load exact python packages verions
+from `uv.lock`. This ensures compatability with the dev
+environment:
+
+  $ RUN uv sync --locked
+
+Activate the newly installed env:
+
+  $ RUN . .venv/bin/activate
+
+Finally, change the entrypoint to:
+
+  ENTRYPOINT["uv", "run", ...]
