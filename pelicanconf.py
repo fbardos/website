@@ -94,3 +94,6 @@ CC_LICENSE = {
     "icon": True,
     "language": "en_US",
 }
+
+# Users dont need to be tracked by Google
+ALLOW_GOOGLE_FONTS = False
