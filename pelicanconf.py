@@ -48,12 +48,14 @@ STATIC_PATHS= [
     'images',
     'extra',
     'gists',
+    'files',
 ]
 
 MAIN_MENU = False
 LINKS_IN_NEW_TAB = False
 LINKS = (
     ("gists", "/gists/"),
+    ("files", "https://files.bardos.dev"),
 )
 
 EXTRA_PATH_METADATA = {
