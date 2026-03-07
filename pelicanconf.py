@@ -97,3 +97,4 @@ CC_LICENSE = {
 
 # Users dont need to be tracked by Google
 ALLOW_GOOGLE_FONTS = False
+USE_GOOGLE_FONTS = False
