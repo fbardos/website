@@ -30,3 +30,11 @@ Hi, my name is Fabian and I'm a Data Engineer from [Winterthur, Switzerland](htt
 * [Public key file](../gists/public_key.asc)
 * Fingerprint `11910d8228ecca5ae88ede317e8e9e61a3dcb529`
 * Uploaded on [Ubuntu Key Server](https://keyserver.ubuntu.com/pks/lookup?op=vindex&search=0x7e8e9e61a3dcb529) and [OpenPGP Key Server](https://keys.openpgp.org/search?q=11910d8228ecca5ae88ede317e8e9e61a3dcb529)
+
+## Credits
+
+Thanks to...
+
+* [github/pelican](https://github.com/getpelican/pelican): This website is built with Pelican.
+* [github/alexandrevicenzi](https://github.com/alexandrevicenzi/Flex): Flex theme for Pelican.
+* [@cmonphotography](https://www.pexels.com/@cmonphotography): For the background of the left panel.
