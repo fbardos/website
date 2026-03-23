@@ -36,3 +36,18 @@ Then, paste the register anywhere with:
   - `"a` select register a
   - `p` paste
 
+
+Quick fix list navigation
+-------------------------
+
+Single list:
+
+]p 	go to next match in list (:cnext)
+[p	go to previous match in list (:cprevious)
+:cfirst	go to first element in list
+
+Multi list:
+
+:col	go to older quick fix list
+:cnew	go to newer quick fix list
+
