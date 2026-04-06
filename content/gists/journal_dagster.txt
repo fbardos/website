@@ -1,0 +1,23 @@
+Interactive debugging in dagster assets
+---------------------------------------
+
+The dagster built in pdb functionality is limited:
+ - no autocomplete (using TAB)
+ - no browsing of past commands (arrow keys)
+
+To improve experience:
+
+ 1. Replace pdb with the drop in replacement of pdb++
+    https://github.com/pdbpp/pdbpp
+ 2. Use a custom helper function to set a breakpoint:
+    https://bardos.dev/gists/2026-04-06_debug_tty_dagster.py
+
+When custom debugger is needed, inside the dagster asset:
+
+  from dagster_module.debug_tty_dagster import set_trace
+  ...
+  set_trace()
+
+Then start materialization with:
+
+  $ dagster asset materialize -f dagster_module/definitions.py --select src/my_asset
