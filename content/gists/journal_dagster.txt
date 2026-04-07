@@ -11,6 +11,10 @@ To improve experience:
     https://github.com/pdbpp/pdbpp
  2. Use a custom helper function to set a breakpoint:
     https://bardos.dev/gists/2026-04-06_debug_tty_dagster.py
+ 3. With the custom debug function, it is now also possible to
+    set the breakpoint in a nested function, without passing
+    the context (AssetExecutionContext) downstream to this
+    particular function I want to debug.
 
 When custom debugger is needed, inside the dagster asset:
 
