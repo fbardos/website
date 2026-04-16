@@ -14,6 +14,10 @@ just execute:
 
   3. Hit ENTER
 
+The same applies for deleting lines. After, selection, use:
+     
+     :g//d
+
 
 Yank to register
 ----------------
