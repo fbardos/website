@@ -1,0 +1,25 @@
+Safe memory when working with categorical data                       2026-04-18
+-------------------------------------------------------------------------------
+
+When working with DataFrame columns with text, use the dtype `cateogry` to safe
+memory. This is increasingly important, when:
+
+ - working with DatFrames with millions of rows
+ - when same string is stored in multiple cells
+
+The default would store the following as `object`, even if it's duplicate data:
+
+  df['source_system'] = 'Public API, version 1.0.0'
+
+Instead, store the data a categorical to save memory:
+
+  df['source_system'] = 'Public API, version 1.0.0'
+  df['source_system'] = df['source_system'].astype('category')
+
+This will consume more memory during initialization of the column. To store
+cateogires directly, use:
+
+  df['source_system'] = pd.Categorical.from_codes(
+      np.zeros(len(df), dtype='int8'),
+      categories=['Public API, version 1.0.0']
+  )
