@@ -1,5 +1,5 @@
-Interactive debugging in dagster assets
----------------------------------------
+Interactive debugging in dagster assets                              2026-04-06
+-------------------------------------------------------------------------------
 
 The dagster built in pdb functionality is limited:
  - no autocomplete (using TAB)
@@ -24,4 +24,6 @@ When custom debugger is needed, inside the dagster asset:
 
 Then start materialization with:
 
-  $ dagster asset materialize -f dagster_module/definitions.py --select src/my_asset
+  $ dagster asset materialize \
+      -f dagster_module/definitions.py \
+      --select src/my_asset
