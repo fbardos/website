@@ -1,0 +1,33 @@
+Use regex PCRE search for pane in tmux                               2026-04-22
+-------------------------------------------------------------------------------
+
+Since tmux 3.1, basic regex is available when searching a pane in
+copy-mode (<leader>-b), then / or ?.
+
+When you want extended functionality (e.g. with regex PCRE), set a keybind
+to pipe the content of the pane to grep:
+
+  bind-key F command-prompt -p "PCRE regex" \
+    "display-popup \
+      -E -w 90% -h 90% \ 
+      \"tmux capture-pane -p -S - | tr -d '\r' | grep -nP '%%' | less\""
+
+
+What this does:
+ - command-prompt
+     opens a prompt which asks for regex pattern
+ - display-popup -E -w 90% -h 90%
+     Opens a popup over the current tmux client and runs a shell command
+     inside it, `-E` closes the popup automatically when the shell exits.
+     `-w` and `-h` set the width and height of the popup.
+ - tmux capture-pane -p -S -
+     Captures the text from a pane. `-p` prints to stdout. `-S -` starts
+     at the beginning of a pane history (instead of only visible part).
+ - tr -d '\r'
+     Remove CR characters (progress displays, term updates, ...)
+ - grep -nP '%%'
+     Do the search itself with regex PCRE. `-n` uses prefixes for each
+     matching line.
+ - less
+     Open stdin with pager less.
+
