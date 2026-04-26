@@ -1,0 +1,24 @@
+bash: Comand line edititing, the Vim way                             2026-04-26
+-------------------------------------------------------------------------------
+
+If familiar with vim motion keys, you can switch in bash to vim-based keybinds.
+
+In .bashrc:
+
+  set -o vi
+
+To see, if in which mode you are, edit .inputrc to something like:
+
+  set editing-mode vi
+  set show-mode-in-prompt on
+  set vi-ins-mode-string \1\e[32m\2[+]\1\e[0m\2
+  set vi-cmd-mode-string \1\e[33m\2[:]\1\e[0m\2
+
+Then, in bash (starting in INSERT mode):
+
+  <Esc> or <C-[>	Switch to COMMAND mode
+  i			Switch to INSERT mode
+
+Replace muscle memory:
+
+  <C-w>			Works in COMMAND and INSERT mode
