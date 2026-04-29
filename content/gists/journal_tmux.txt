@@ -7,27 +7,43 @@ copy-mode (<leader>-b), then / or ?.
 When you want extended functionality (e.g. with regex PCRE), set a keybind
 to pipe the content of the pane to grep:
 
-  bind-key F command-prompt -p "PCRE regex" \
-    "display-popup \
-      -E -w 90% -h 90% \ 
-      \"tmux capture-pane -p -S - | tr -d '\r' | grep -nP '%%' | less\""
+  bind-key F command-prompt -F -p "PCRE pattern" \
+    "split-window -v -l 20 \
+    \"tmux capture-pane -p -t '#{pane_id}' -S - \
+    | rg --color=always -n -P -- \\\"%%%\\\" \
+    | LESS= less -R\""
 
+In short:
+  Will user ask for a regex pattern and then open the results in a new pane
+  at the bottom.
 
 What this does:
- - command-prompt
-     opens a prompt which asks for regex pattern
- - display-popup -E -w 90% -h 90%
-     Opens a popup over the current tmux client and runs a shell command
-     inside it, `-E` closes the popup automatically when the shell exits.
-     `-w` and `-h` set the width and height of the popup.
- - tmux capture-pane -p -S -
-     Captures the text from a pane. `-p` prints to stdout. `-S -` starts
-     at the beginning of a pane history (instead of only visible part).
- - tr -d '\r'
-     Remove CR characters (progress displays, term updates, ...)
- - grep -nP '%%'
-     Do the search itself with regex PCRE. `-n` uses prefixes for each
-     matching line.
- - less
-     Open stdin with pager less.
 
+  command-prompt -F
+    Opens a tmux prompt and expands tmux formats like #{pane_id}.
+
+  #{pane_id}
+    Expands to the pane ID of the pane where Prefix + F was pressed.
+
+  split-window -v -l 20
+    Opens a new 20-line pane at the bottom.
+
+  tmux capture-pane -p -t '#{pane_id}' -S -
+    Captures the full available scrollback from the original pane and
+    prints it to stdout.
+
+  rg --color=always -n -P -- "pattern"
+    Searches the captured text with ripgrep.
+    -P enables PCRE2 regex support.
+    -n shows line numbers.
+    --color=always keeps match highlighting enabled.
+    -- stops option parsing so patterns starting with "-" are safe.
+
+  %%%
+    Is replaced by the regex entered in the tmux prompt, with double quotes
+    escaped safely.
+
+  LESS= less -R
+    Opens the results in pager less.
+    LESS= clears any existing LESS options, avoiding auto-exit behavior.
+    -R preserves colored output from ripgrep.
