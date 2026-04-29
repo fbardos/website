@@ -1,3 +1,16 @@
+Execute command in bash with current buffer as arg                   2026-04-29
+-------------------------------------------------------------------------------
+
+It is possible to use the filepath of the current buffer as arg, when executing
+a bash command inside vim:
+
+Example:
+
+  :!git blame %
+
+Where '%' will be replaced with the buffer's filename.
+
+
 Quick fix list navigation                                            2026-03-23
 -------------------------------------------------------------------------------
 
