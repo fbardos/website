@@ -192,18 +192,3 @@ do
   [ -r "$file" ] && . "$file"
 done
 
-##############################################################################################################
-
-# OLD
-
-
-# make less more friendly for non-text input files, see lesspipe(1)
-# [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-
-# Install Ruby Gems to ~/gems
-# export GEM_HOME="$HOME/gems"
-# export PATH="$HOME/gems/bin:$PATH"
-# . "$HOME/.cargo/env"
-
-
