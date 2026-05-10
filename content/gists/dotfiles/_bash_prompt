@@ -6,6 +6,32 @@
 # ------------------------------------------------------------
 # current config
 # ------------------------------------------------------------
+
+# Dark background colors:
+# 40 black
+# 41 dark red
+# 42 dark green
+# 43 dark yellow / brown
+# 44 dark blue
+# 45 dark magenta
+# 46 dark cyan
+# 47 light gray
+#
+# e.g. \[\033[0;42m\]
+#               ^^
+#
+# Foreground colors (if needed):
+# 30 black
+# 31 red
+# 32 green
+# 33 yellow / brown
+# 34 blue
+# 35 magenta
+# 36 cyan
+# 37 white / light gray
+#
+# e.g. \[\033[0;30;42m\]
+#               ^^
 PS1="\[\033[0;42m\][\h]\[\033[0m\] \u \[\033[0;32m\]\w\[\033[0m\]$ "
 
 # ------------------------------------------------------------
