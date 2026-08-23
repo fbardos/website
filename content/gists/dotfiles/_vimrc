@@ -160,7 +160,7 @@ endif
 " Mouse
 " ----------------------------------------------------------------------------
 
-set mouse=a
+set mouse=
 
 " ----------------------------------------------------------------------------
 " Folding
@@ -220,13 +220,13 @@ augroup user_filetypes
   autocmd!
 
   " Git commits
-  autocmd FileType gitcommit setlocal spell textwidth=72 colorcolumn=73
+  autocmd FileType gitcommit setlocal textwidth=72 colorcolumn=73
 
   " Markdown
-  autocmd FileType markdown setlocal wrap linebreak spell textwidth=80 tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType markdown setlocal wrap linebreak textwidth=80 tabstop=2 shiftwidth=2 softtabstop=2
 
   " Plain text
-  autocmd FileType text setlocal wrap linebreak spell textwidth=80
+  autocmd FileType text setlocal wrap linebreak textwidth=80
 
   " YAML
   autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
