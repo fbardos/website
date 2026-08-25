@@ -4,10 +4,12 @@ Summary: Introducing myself.
 
 Hi, my name is Fabian and I'm a Data Engineer from [Winterthur, Switzerland](https://www.openstreetmap.org/relation/1682243). I mainly code in [Python](http://python.org), like cycling, cooking and reading books. Currently, I work for the [City of Winterthur](https://stadt.winterthur.ch/).
 
+Data Producer by day, Data User by night.
+
 ## Like
 * [FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software): I'm deeply inspired by people spending their free time on a project and share it with the world. I truly believe this will make our world a better one.
 * [Open (Government) Data](https://en.wikipedia.org/wiki/Open_data): Open Data empowers innovation, is the foundation for discussions based on facts.
-* [Linux](http://kernel.org): Started with [OpenSuse](https://www.opensuse.org/) in 2006, currently on [Debian](https://www.debian.org/) and [Ubuntu](https://ubuntu.com/). You can find some of my dotfiles [here](https://bardos.dev/gists/dotfiles).
+* [Linux](http://kernel.org): Started with [OpenSuse](https://www.opensuse.org/) in 2006, currently on [Debian](https://www.debian.org/) and [Ubuntu](https://ubuntu.com/). You can find some of my dotfiles [here](https://github.com/fbardos/dotfiles).
 
 ## Maintaining
 * [ODAPI](https://github.com/fbardos/odapi): An API to get curated Swiss Open Data for municipalities, districts and cantons.
