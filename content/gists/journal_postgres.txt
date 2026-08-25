@@ -1,0 +1,134 @@
+OPERATIONS ON ARRAYS                                                 2026-05-10
+-------------------------------------------------------------------------------
+
+Containment operators
+
+
+  <@    "is contained by"
+  -----------------------
+  Every element on the left exists on the array on the right.
+  Useful for "arr <@ allowed_values".
+
+    ARRAY[true, true] <@ ARRAY[true]                                       TRUE
+    ARRAY[true, false] <@ ARRAY[true]                                     FALSE
+
+
+  @>    "contains"
+  ----------------
+  The left array contains all elements from the right array.
+  Useful for "arr @> required_values".
+
+    ARRAY['admin', 'editor', 'user'] @> ARRAY['admin']                     TRUE
+    ARRAY['editor', 'user'] @> ARRAY['admin']                             FALSE
+
+
+  &&    "overlaps"
+  ----------------
+  The two arrays have at leat one value in common.
+  Useful for "arr && wanted_values"
+
+    ARRAY['red', 'blue'] && ARRAY['blue', 'green']                         TRUE
+    ARRAY['red', 'blue'] && ARRAY['yellow', 'green']                      FALSE
+
+
+  = ANY(arr)
+  ----------
+  The value equals at least one element in the array.
+
+    TRUE = ANY(ARRAY[false, true, false])                                  TRUE
+    TRUE = ANY(ARRAY[false, false])                                       FALSE
+
+  See also,
+   - LIKE ANY(arr)
+   - ILIKE ANY(arr)
+
+
+  <> ALL(arr)
+  -----------
+  ...
+
+
+  = ALL(arr)
+  ----------
+  ...
+
+  arr[1]
+  arr[2:3]
+  cardinality(arr)
+  array_length()
+  array_append()
+  array_prepend()
+  array_cat()
+  array_remove()
+  array_replace()
+  array_position()
+  array_positions()
+  unnest()
+  unnest() WITH ORDINALITY
+  array_agg()
+  string_to_array()
+  array_to_string()
+
+Examples, for an example ARRAY[true, NULL, false, false, true] aliased arr.
+
+Keep the row only, if all the values in an array are TRUE:
+
+  WHERE arr <@ ARRAY[true]
+
+  Prosa: "Keep the row if every element in arr is also present in ARRAY[true]"
+
+  But careful, '{}'::boolean[] <@ ARRAY[true] will also result to TRUE, because
+  of no invalid values.
+
+Keep the row, if ANY of the values is TRUE:
+
+  WHERE TRUE = any(arr)
+
+Remove elements in an array with array_remove(), for example:
+
+  SELECT array_remove(arr, NULL);
+
+
+
+
+
+GROUP BY GROUPING SETS ()                                            2026-04-23
+-------------------------------------------------------------------------------
+
+If you want to run several different GROUP BY clauses in one query, use
+grouping sets.
+
+Instead of writing:
+
+  select a, b, sum(x) from t group by a, b
+  union all
+  select a, null, sum(x) from t group by a
+  union all
+  select null, null, sum(x) from t;
+
+Use something like:
+
+  select region, product, sum(amount) as total
+  from sales
+  group by grouping sets (						                            <--
+    (region, product),  -- detail totals by region+product   GROUPING 0     <--
+    (region),           -- subtotal by region	             GROUPING 1     <--
+    (product),          -- subtotal by product	             GROUPING 2     <--
+    ()                  -- grand total		                 GROUPING 3     <--
+  );									                                    <--
+
+Which will return something like:
+
+  region  product   total
+  ------  -------   -----
+  ZH      A         100
+  ZH      B         150
+  BE      A         200
+  ZH      NULL      250   -- subtotal by region
+  BE      NULL      200   -- subtotal by region
+  NULL    A         300   -- subtotal by product
+  NULL    B         150   -- subtotal by product
+  NULL    NULL      450   -- grand total
+
+Use grouping(regin, product) in a CASE statement to check in which group the
+resulting row currently is.
