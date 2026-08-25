@@ -1,3 +1,14 @@
+X11: kill a window with xkill                                        2026-05-08
+-------------------------------------------------------------------------------
+
+Sometimes, when a window in i3wm is frozen, a connot kill it with the usual
+Mod+Shift+q. In this case, open another terminal window and run:
+
+  $ xkill
+
+This will let you kill a window by using your cursor.
+
+
 bash: Comand line edititing, the Vim way                             2026-04-26
 -------------------------------------------------------------------------------
 
