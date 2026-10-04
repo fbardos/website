@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Links</title>
+  <id>https://bardos.dev/feeds/links.xml</id>
+  <updated>2026-10-04T18:00:00+02:00</updated>
+
+  <author>
+    <name>Fabian Bardos</name>
+  </author>
+
+  <entry>
+    <title>Richard Stallman: For a free digital society</title>
+    <id>https://example.org/article</id>
+    <id>https://michael.team/yt/?yt=https://www.youtube.com/watch?v=7ZSPf7YnGfE"</id>
+    <link href="https://michael.team/yt/?yt=https://www.youtube.com/watch?v=7ZSPf7YnGfE"/>
+    <category term="tech"/>
+    <category term="gnu"/>
+    <category term="stallman"/>
+    <category term="free software"/>
+    <category term="libre"/>
+    <updated>2016-02-18T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
+    <title>David Kriesel: Traue keinem Scan, den du nicht selbst gefälscht hast</title>
+    <id>https://media.ccc.de/v/31c3_-_6558_-_de_-_saal_g_-_201412282300_-_traue_keinem_scan_den_du_nicht_selbst_gefalscht_hast_-_david_kriesel</id>
+    <link href="https://media.ccc.de/v/31c3_-_6558_-_de_-_saal_g_-_201412282300_-_traue_keinem_scan_den_du_nicht_selbst_gefalscht_hast_-_david_kriesel"/>
+    <category term="tech"/>
+    <category term="ccc"/>
+    <category term="ocr"/>
+    <category term="xerox"/>
+    <category term="scanner"/>
+    <updated>2014-12-28T00:00:00+02:00</updated>
+  </entry>
+
+</feed>

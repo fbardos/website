@@ -61,6 +61,9 @@ LINKS = (
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     "extra/custom.css": {"path": "static/custom.css"},
+    'extra/links.xml': {
+        'path': 'feeds/links.xml',
+    },
 }
 
 CUSTOM_CSS = "static/custom.css"
