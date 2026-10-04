@@ -11,16 +11,76 @@
   </author>
 
   <entry>
+    <title>Blackhat 26: OpenAI-HuggingFace Incident</title>
+    <id>https://xoutu.be/87DyyMV0kCY</id>
+    <link href="https://xoutu.be/87DyyMV0kCY"/>
+    <category term="tech"/>
+    <category term="blackhat"/>
+    <category term="ai"/>
+    <updated>2026-08-06T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
+    <title>38c3: Wir wissen, wo dein Auto steht</title>
+    <id>https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen</id>
+    <link href="https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen"/>
+    <category term="tech"/>
+    <category term="ccc"/>
+    <category term="vw"/>
+    <updated>2023-08-29T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
+    <title>37c3: Breaking the DRM in Polish trains</title>
+    <id>https://media.ccc.de/v/37c3-12142-breaking_drm_in_polish_trains</id>
+    <link href="https://media.ccc.de/v/37c3-12142-breaking_drm_in_polish_trains"/>
+    <category term="tech"/>
+    <category term="ccc"/>
+    <category term="poland"/>
+    <category term="trains"/>
+    <updated>2023-12-27T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
+    <title>Andrew Courter: Ultimate Quickfix List Guide</title>
+    <id>https://xoutu.be/AuXZA-xCv04</id>
+    <link href="https://xoutu.be/AuXZA-xCv04"/>
+    <category term="tech"/>
+    <category term="vim"/>
+    <category term="quickfix"/>
+    <updated>2023-08-29T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
+    <title>leyrer: tmux</title>
+    <id>https://media.ccc.de/v/gpn18-105-tmux-warum-ein-schwarzes-fenster-am-bildschirm-reicht</id>
+    <link href="https://media.ccc.de/v/gpn18-105-tmux-warum-ein-schwarzes-fenster-am-bildschirm-reicht"/>
+    <category term="tech"/>
+    <category term="ccc"/>
+    <category term="tmux"/>
+    <updated>2018-05-11T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
     <title>Richard Stallman: For a free digital society</title>
-    <id>https://example.org/article</id>
-    <id>https://michael.team/yt/?yt=https://www.youtube.com/watch?v=7ZSPf7YnGfE"</id>
-    <link href="https://michael.team/yt/?yt=https://www.youtube.com/watch?v=7ZSPf7YnGfE"/>
+    <id>https://xoutu.be/7ZSPf7YnGfE</id>
+    <link href="https://xoutu.be/7ZSPf7YnGfE"/>
     <category term="tech"/>
     <category term="gnu"/>
     <category term="stallman"/>
     <category term="free software"/>
     <category term="libre"/>
     <updated>2016-02-18T00:00:00+02:00</updated>
+  </entry>
+
+  <entry>
+    <title>32c3: Dieselgate</title>
+    <id>https://media.ccc.de/v/32c3-7331-the_exhaust_emissions_scandal_dieselgate</id>
+    <link href="https://media.ccc.de/v/32c3-7331-the_exhaust_emissions_scandal_dieselgate"/>
+    <category term="tech"/>
+    <category term="ccc"/>
+    <category term="vw"/>
+    <updated>2015-12-27T00:00:00+02:00</updated>
   </entry>
 
   <entry>
