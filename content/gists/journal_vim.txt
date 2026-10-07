@@ -1,3 +1,15 @@
+Git file history with Diffview                                       2026-10-07
+-------------------------------------------------------------------------------
+
+View the git history of a file with:
+
+  :DiffviewFileHistory path/to/file
+
+Or, for current buffer:
+
+  :DiffViewFileHistory %
+
+
 Execute command in bash with current buffer as arg                   2026-04-29
 -------------------------------------------------------------------------------
 
