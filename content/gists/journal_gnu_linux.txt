@@ -1,3 +1,15 @@
+curl: GET request with --data-urlencode                              2026-10-09
+-------------------------------------------------------------------------------
+
+When using curl with --data-urlencode, curl will send a POST request instead
+of the usual GET request. This can be wrong for API requests.
+
+Instead, use -G/--get when using with --data-urlencode
+
+  curl -G '...' \
+    --data-urlencode "..."
+
+
 X11: kill a window with xkill                                        2026-05-08
 -------------------------------------------------------------------------------
 
