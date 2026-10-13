@@ -1,0 +1,8 @@
+cherry-pick -x                                                       2026-10-13
+-------------------------------------------------------------------------------
+
+When cherry-picking, use the `-x` flag to append the original commit SHA to
+the commit msg, which will be easier for referencing.
+
+  cherry-pick -x [commit-sha]
+
