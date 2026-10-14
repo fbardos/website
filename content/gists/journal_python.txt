@@ -1,4 +1,17 @@
-Safe memory when working with categorical data                       2026-04-18
+requests: fine tune timetout                                         2026-10-14
+-------------------------------------------------------------------------------
+
+requests.get() also accepts a tuple as timeout. Example:
+
+  requests.get(url, timeout=5, 45))
+
+means
+
+  - 5  seconds connect timeout
+  - 45 seconds read    timeout
+
+
+pandas: Safe memory when working with categorical data               2026-04-18
 -------------------------------------------------------------------------------
 
 When working with DataFrame columns with text, use the dtype `cateogry` to safe
