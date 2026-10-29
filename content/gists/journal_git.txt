@@ -1,3 +1,15 @@
+Difference between .. and ...                                        2026-10-29
+-------------------------------------------------------------------------------
+
+In branch comparison, e.g.:
+
+  origin/main..HEAD             Latest main vs. latest feature branch
+  origin/main...HEAD            Common anvestor vs. latest feature branch
+
+Before merging, use ... to see changes introduced by feature branch, without
+all the changes made on main.
+
+
 cherry-pick -x                                                       2026-10-13
 -------------------------------------------------------------------------------
 
