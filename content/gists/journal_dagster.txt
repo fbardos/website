@@ -1,3 +1,17 @@
+Interactive debugging in dagster assets - the intended way           2026-11-01
+-------------------------------------------------------------------------------
+
+See:
+  https://github.com/dagster-io/dagster/discussions/33654#discussioncomment-18760713
+
+  # debug_asset.py
+  import dagster as dg
+
+  if __name__ == "__main__":
+      from mydagster.definitions import defs
+      dg.materialize([upstream_asset, my_asset], resources=defs.resources)
+
+
 Interactive debugging in dagster assets                              2026-04-06
 -------------------------------------------------------------------------------
 
