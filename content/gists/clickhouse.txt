@@ -1,0 +1,477 @@
+CLICKHOUSE DATA TYPES                                                2026-11-15
+-------------------------------------------------------------------------------
+All integer ranges are inclusive. Numeric sizes are uncompressed sizes.
+"No fixed range" means there is no meaningful scalar numeric range;
+resource limits, settings, and the contained types may still restrict values.
+
+Notation
+--------
+  ^              exponentiation, e.g. 2^64
+  P              total decimal digits (precision)
+  S              decimal digits to the right of the point (scale)
+  T, K, V        nested types (element, key, value)
+  p              fractional second digits (0 through 9)
+  ..             inclusive range unless explicitly described otherwise
+
+
+01. SIGNED INTEGERS: Int
+-----------------------
+Fixed-width, signed, two's-complement whole numbers. An IntN stores values
+from -2^(N-1) through 2^(N-1)-1 with no fractional component.
+
+  Int8       1 byte    -128 .. 127
+  Int16      2 bytes   -32,768 .. 32,767
+  Int32      4 bytes   -2,147,483,648 .. 2,147,483,647
+  Int64      8 bytes   -9,223,372,036,854,775,808 ..
+                        9,223,372,036,854,775,807
+  Int128    16 bytes   -2^127 .. 2^127 - 1
+                        (~-1.7014e38 .. +1.7014e38)
+  Int256    32 bytes   -2^255 .. 2^255 - 1
+                        (~-5.7896e76 .. +5.7896e76)
+
+  Int128 decimal minimum: -170141183460469231731687303715884105728
+  Int128 decimal maximum:  170141183460469231731687303715884105727
+  Int256 minimum (join consecutive digit chunks):
+    -5789604461865809771178549250434395392663499233282028201
+    9728792003956564819968
+  Int256 maximum (join consecutive digit chunks):
+    5789604461865809771178549250434395392663499233282028201
+    9728792003956564819967
+
+
+02. UNSIGNED INTEGERS: UInt
+--------------------------
+Fixed-width, non-negative whole numbers. A UIntN stores values from zero
+through 2^N-1 and uses all bits for magnitude.
+
+  UInt8      1 byte     0 .. 255
+  UInt16     2 bytes    0 .. 65,535
+  UInt32     4 bytes    0 .. 4,294,967,295
+  UInt64     8 bytes    0 .. 18,446,744,073,709,551,615
+  UInt128   16 bytes    0 .. 2^128 - 1 (~3.4028e38)
+  UInt256   32 bytes    0 .. 2^256 - 1 (~1.1579e77)
+
+  UInt128 decimal maximum: 340282366920938463463374607431768211455
+  UInt256 maximum (join consecutive digit chunks):
+    1157920892373161954235709850086879078532699846656405640
+    39457584007913129639935
+
+
+03. FLOATING-POINT NUMBERS: Float / BFloat
+-----------------------------------------
+Approximate binary floating-point numbers with finite ranges plus special
+values (positive/negative infinity and NaN). Not suitable for exact money.
+
+  BFloat16   2 bytes   finite: +/-3.38953139e38
+                        smallest positive normal:    1.17549435e-38
+                        smallest positive subnormal: 9.18354962e-41
+                        precision: about 2-3 decimal digits
+  Float32    4 bytes   finite: +/-3.40282347e38
+                        smallest positive normal:    1.17549435e-38
+                        smallest positive subnormal: 1.40129846e-45
+                        precision: about 6-9 decimal digits
+  Float64    8 bytes   finite: +/-1.7976931348623157e308
+                        smallest positive normal: 2.2250738585e-308
+                        smallest positive subnormal: 4.9406564584e-324
+                        precision: about 15-17 decimal digits
+
+  Note: +/- means symmetric finite extrema, not every real value between.
+  BFloat16 has Float32-like exponent range but far lower precision.
+  ClickHouse supports only limited arithmetic directly on BFloat16.
+
+
+04. FIXED-POINT NUMBERS: Decimal
+--------------------------------
+Signed, exact base-10 fixed-point numbers with a specified decimal scale.
+The documented decimal range is exclusive at +/-10^(P-S); increments are
+10^(-S), so the greatest magnitude is 10^(P-S) - 10^(-S).
+
+  Decimal(P, S)   1 <= P <= 76; 0 <= S <= P
+                  values: -(10^P - 1)/10^S .. +(10^P - 1)/10^S
+                  last digit step: 10^(-S)
+  Decimal(P)      same as Decimal(P, 0)
+  Decimal         same as Decimal(10, 0)
+
+  Decimal32(S)     4 bytes   P <= 9;   0 <= S <= 9
+                   range: -10^(9-S) < x < 10^(9-S)
+  Decimal64(S)     8 bytes   P <= 18;  0 <= S <= 18
+                   range: -10^(18-S) < x < 10^(18-S)
+  Decimal128(S)   16 bytes   P <= 38;  0 <= S <= 38
+                   range: -10^(38-S) < x < 10^(38-S)
+  Decimal256(S)   32 bytes   P <= 76;  0 <= S <= 76
+                   range: -10^(76-S) < x < 10^(76-S)
+
+  Decimal(P,S) storage selected by P:
+    P = 1..9       -> Decimal32(S)
+    P = 10..18     -> Decimal64(S)
+    P = 19..38     -> Decimal128(S)
+    P = 39..76     -> Decimal256(S)
+
+  Example: Decimal32(4) = -99999.9999 .. 99999.9999, step 0.0001.
+  The underlying binary integer can encode more, but the decimal limits
+  above are the documented, validated precision ranges.
+  Arithmetic overflow checks are incomplete for Decimal128/Decimal256.
+
+
+05. BOOLEAN: Bool
+-----------------
+Logical true or false, represented internally using one UInt8 byte. Use it
+for predicates or flags, not as a general-purpose numeric column.
+
+  Bool            1 byte    false (0), true (1)
+  BOOL / BOOLEAN            Common spelling aliases; see system catalog.
+
+
+06. STRINGS: String / FixedString
+--------------------------------
+Byte sequences, not inherently Unicode text. UTF-8 is recommended for
+human-readable text, but zero bytes and arbitrary binary data are allowed.
+
+  String          variable length, 0 bytes and upward
+                  No defined maximum length in the type specification.
+                  Actual limits come from memory and execution settings.
+  FixedString(N)  exactly N bytes in storage; N is a positive integer
+                  Input <= N bytes is zero-padded to length N.
+                  Input > N bytes raises an error.
+
+  VARCHAR(n), CHAR(n), TEXT, BLOB and many related SQL type names are
+  aliases for String; n does NOT impose a ClickHouse length constraint.
+  FixedString(N) measures BYTES, not Unicode characters.
+
+
+07. CALENDAR DATES: Date / Date32
+--------------------------------
+Calendar dates with day resolution, without a time of day or time zone.
+Date32 provides an extended calendar range using signed day offsets.
+
+  Date            2 bytes    1970-01-01 .. 2149-06-06
+                            UInt16 days since 1970-01-01
+  Date32          4 bytes    0000-01-01 .. 9999-12-31
+                            Int32 days since 1970-01-01
+
+  Date32's range was expanded in newer ClickHouse releases.
+
+
+08. TIMESTAMPS: DateTime / DateTime64
+------------------------------------
+An instant stored relative to the Unix epoch. Optional column time zones
+affect text input/output and calendar operations, not row-level storage.
+
+  DateTime               4 bytes, 1-second precision
+                         UTC range: 1970-01-01 00:00:00 ..
+                                    2106-02-07 06:28:15
+                         underlying count: UInt32 seconds
+  DateTime('TZ')         same range, with named time-zone metadata
+
+  DateTime64(p)          8 bytes, resolution 10^(-p) seconds
+                         p = 0..9; underlying Int64 ticks
+  DateTime64(p, 'TZ')    same, with named time-zone metadata
+
+  DateTime64 range depends on precision:
+    p = 0..7   0000-01-01 00:00:00 .. 9999-12-31 23:59:59[.frac]
+    p = 8      0000-01-01 .. approximately 4892-10-07 (UTC)
+    p = 9      1677-09-21 00:12:44.145224192 ..
+               2262-04-11 23:47:16.854775807 (UTC)
+
+  [.frac] means p fractional digits, with maximum digits all 9s.
+  p = 3: milliseconds; p = 6: microseconds; p = 9: nanoseconds.
+  The expanded range for p <= 7 arrived in ClickHouse 26.7.
+
+
+09. TIME WITHOUT DATE: Time / Time64
+-----------------------------------
+Time-like quantities independent of dates, allowing hours beyond 24 and
+negative values. No time zone is supported; textual values are saturated.
+
+  Time            4 bytes   -999:59:59 .. +999:59:59
+                            1-second resolution; Int32 internal value
+  Time64(p)       8 bytes   -999:59:59[.frac] ..
+                            +999:59:59[.frac], p = 0..9
+                            10^(-p)-second resolution; Int64 ticks
+
+  Example: Time64(3) text covers -999:59:59.999 to +999:59:59.999.
+  Internally stored numeric values can exceed the text saturation bounds.
+  Time/Time64 were introduced in 25.6; check settings on older versions.
+
+
+10. ENUMERATIONS: Enum
+---------------------
+Named, explicitly enumerated values backed by small signed integers. Only
+labels declared in the type can be inserted or stored.
+
+  Enum8(...)      1 byte    backing codes: -128 .. 127
+                            up to 256 named code values
+  Enum16(...)     2 bytes   backing codes: -32,768 .. 32,767
+                            up to 65,536 named code values
+  Enum(...)                 inferred Enum8 or Enum16
+
+  Example: Enum8('inactive' = 0, 'active' = 1).
+
+
+11. IDENTIFIERS: UUID
+---------------------
+A 128-bit universally unique identifier, rendered as hexadecimal groups
+in 8-4-4-4-12 layout. It does not imply any particular UUID version.
+
+  UUID            16 bytes  00000000-0000-0000-0000-000000000000 ..
+                             ffffffff-ffff-ffff-ffff-ffffffffffff
+                             2^128 distinct bit patterns
+
+
+12. NETWORK ADDRESSES: IPv4 / IPv6
+---------------------------------
+IP addresses stored in binary, not as variable-length text. The domains
+are all 32-bit IPv4 and 128-bit IPv6 address patterns, respectively.
+
+  IPv4            4 bytes   0.0.0.0 .. 255.255.255.255
+                            numeric equivalent: 0 .. 2^32 - 1
+  IPv6           16 bytes   :: .. ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+                            2^128 possible address patterns
+
+
+13. ARRAYS: Array
+-----------------
+Variable-length, ordered, homogeneous collections. The range of each
+member is determined by T; empty arrays are allowed.
+
+  Array(T)                  length: 0 .. implementation/resource limit
+                            elements: values from type T
+  Array(Nullable(T))        elements can also be NULL
+  Array(Array(T))           multidimensional / nested arrays
+
+
+14. TUPLES: Tuple
+-----------------
+Fixed-arity heterogeneous records with positional or named fields. Each
+field has the range of its declared type.
+
+  Tuple(T1, T2, ...)        fixed number of elements at schema definition
+  Tuple(name1 T1, ...)      named elements with the same type constraints
+
+
+15. MAPS: Map
+-------------
+Collections of key-value pairs; keys and values have declared types. Map
+keys are not guaranteed unique, so a Map is not a uniqueness constraint.
+
+  Map(K, V)                 key values: type K; value values: type V
+                            entries: 0 .. implementation/resource limit
+  Map(String, UInt64)       example: string to unsigned-count mapping
+
+
+16. NESTED RECORDS: Nested
+--------------------------
+Repeated records with named fields, usually represented as parallel
+arrays of equal length. Each field uses its own declared type range.
+
+  Nested(a T1, b T2, ...)   variable number of records, fixed field schema
+                            equivalent to Array(Tuple(...)) conceptually
+
+
+17. JSON DOCUMENTS: JSON
+------------------------
+Native semi-structured JSON column with typed or dynamically inferred
+paths. It can hold evolving document shapes without predeclaring all keys.
+
+  JSON                      document values; no simple scalar range
+  JSON(max_dynamic_paths=N)  N separate dynamic paths per data part/block
+                             default N = 1024; excess uses shared storage
+  JSON(max_dynamic_types=M)  M types per dynamic path, M = 1..255
+                             default M = 32; excess uses shared storage
+  JSON(path TypeName, ...)   optional typed paths, SHARED, and SKIP clauses
+
+  The path/type limits govern separate storage, not hard limits on valid
+  document paths or value types. Standard JSON data has its own syntax.
+
+
+18. DYNAMIC VALUES: Dynamic
+--------------------------
+A tagged value whose underlying data type may change from row to row. It
+stores the actual type of each non-NULL value and can represent NULL.
+
+  Dynamic                   range: union of encountered underlying types
+  Dynamic(max_types=N)      N = 0..254; default 32
+                             additional types use shared binary storage
+
+
+19. UNION VALUES: Variant
+-------------------------
+A tagged union with a declared list of allowed alternative types. Each
+row contains one alternative or NULL, so limits depend on alternatives.
+
+  Variant(T1, T2, ...)      range: values of T1 OR T2 OR ... OR NULL
+  Variant(UInt64, String)   example: unsigned integer, string, or NULL
+
+  Nested Nullable(...), LowCardinality(Nullable(...)), and Variant(...)
+  alternatives are not supported directly in Variant declarations.
+
+
+20. NULLABLE VALUES: Nullable
+-----------------------------
+Adds NULL to the allowed values of a base type. The underlying T still
+has its original range and NULL is not a number within that range.
+
+  Nullable(T)               range: T's range plus NULL
+  Nullable(Int16)           NULL or -32,768 .. 32,767
+  Nullable(Array(T))        unsupported; use Array(Nullable(T)) if needed
+  Nullable(Map(K,V))        unsupported
+
+
+21. DICTIONARY-ENCODED VALUES: LowCardinality
+---------------------------------------------
+Changes storage to dictionary-encoded values; logical values are the same
+as type T. Most useful for strings or other low-cardinality columns.
+
+  LowCardinality(T)         range: exactly the range of T
+  LowCardinality(String)    arbitrary byte strings, dictionary-encoded
+  LowCardinality(Nullable(String))  strings or NULL
+
+  Often beneficial below ~10,000 distinct values; very high distinct
+  counts may reduce efficiency. Decimal is not a supported base type.
+
+
+22. GEOMETRIC TYPES: Point / ...
+--------------------------------
+Built from Float64 coordinate pairs and arrays of those pairs. ClickHouse
+does not attach an implicit CRS/SRID or enforce lon/lat coordinate bounds.
+
+  Point             Tuple(Float64, Float64)
+                    two Float64 coordinates (x, y)
+  MultiPoint        Array(Point)
+                    zero or more points
+  Ring              Array(Point)
+                    one polygon boundary, no holes
+  LineString        Array(Point)
+                    ordered points along one line
+  MultiLineString   Array(LineString)
+                    zero or more lines
+  Polygon           Array(Ring)
+                    first ring exterior; subsequent rings are holes
+  MultiPolygon      Array(Polygon)
+                    zero or more polygons
+
+  Numeric coordinate range: Float64's finite range plus special values
+  at the storage-type level; sensible geometry requires valid inputs.
+  No automatic EPSG:4326 restriction, CRS transformation, or topology.
+
+
+23. VECTOR BIT-PLANE TYPE: QBit
+-------------------------------
+Fixed-dimensional numeric vectors stored in transposed bit planes to
+speed up quantized similarity search. Precision/range follow element type.
+
+  QBit(Int8, D)             D integer components, each -128 .. 127
+  QBit(BFloat16, D)         D components, BFloat16 numeric range
+  QBit(Float32, D)          D components, Float32 numeric range
+  QBit(Float64, D)          D components, Float64 numeric range
+  QBit(T, D, stride)        optional bit-plane grouping by stride
+
+  D is the fixed vector length; no universal numeric component range.
+  When stride < D, stride must divide D and be a multiple of 8.
+
+
+24. AGGREGATION STATE: AggregateFunction
+----------------------------------------
+Stores an aggregate function's intermediate binary state, not necessarily
+its finalized result. The type and limits depend on the aggregate used.
+
+  AggregateFunction(fn, T1, ...)   range: function-specific state
+  AggregateFunction(uniq, UInt64)  example: mergeable uniqueness state
+  AggregateFunction(sum, Int64)    example: mergeable sum state
+
+  Use fnState(), fnMerge(), and finalizeAggregation() where appropriate.
+
+
+25. SIMPLE AGGREGATION: SimpleAggregateFunction
+-----------------------------------------------
+Stores the aggregate's result-like value, not a full opaque state, for
+functions that can merge their partial results in the same form.
+
+  SimpleAggregateFunction(fn, T)  range: underlying result type T
+  SimpleAggregateFunction(sum, UInt64)  example: unsigned sum result
+  SimpleAggregateFunction(max, Date)    example: Date range
+
+
+26. INTERVALS: Interval
+----------------------
+A count of a specified time unit, used in date/time arithmetic. Values
+are internally 64-bit signed counts and may be negative.
+
+  IntervalNanosecond    signed Int64 count of nanoseconds
+  IntervalMicrosecond   signed Int64 count of microseconds
+  IntervalMillisecond   signed Int64 count of milliseconds
+  IntervalSecond        signed Int64 count of seconds
+  IntervalMinute        signed Int64 count of minutes
+  IntervalHour          signed Int64 count of hours
+  IntervalDay           signed Int64 count of days
+  IntervalWeek          signed Int64 count of weeks
+  IntervalMonth         signed Int64 count of months
+  IntervalQuarter       signed Int64 count of quarters
+  IntervalYear          signed Int64 count of years
+
+  Underlying count range for each:
+    -9,223,372,036,854,775,808 .. 9,223,372,036,854,775,807
+  Calendar arithmetic can overflow a date type before the count does.
+  Syntax: INTERVAL 7 DAY, INTERVAL -3 HOUR, toIntervalMinute(10).
+  Compound SQL intervals (YEAR TO MONTH, DAY TO SECOND, etc.) are tuples
+  of these interval types, not additional scalar storage families.
+
+
+27. SPECIAL / INTERNAL TYPES
+----------------------------
+ClickHouse also has internal types used while analyzing or executing
+queries; these are not ordinary general-purpose table column types.
+
+  Nothing           empty/bottom type, commonly associated with NULL
+                    Has no ordinary non-NULL values or numeric range.
+  Set               internal representation for set membership (IN)
+                    The members determine values; no scalar range.
+  Expression        intermediate expression type in query processing
+                    Not a conventional stored value with a range.
+
+
+28. ALIASES, DOMAIN TYPES, AND SCOPE
+------------------------------------
+SQL-compatible aliases are names for existing families, not new numeric
+ranges. Domain types add interpretation to base values, not new bounds.
+
+  Common numeric aliases:
+    TINYINT, INT1, BYTE         -> Int8
+    SMALLINT                    -> Int16
+    INT, INTEGER, MEDIUMINT     -> Int32
+    BIGINT, SIGNED              -> Int64
+    UNSIGNED                    -> UInt64
+    FLOAT, REAL, SINGLE         -> Float32
+    DOUBLE, DOUBLE PRECISION    -> Float64
+    YEAR                        -> UInt16 (alias, not calendar Date)
+    BIT, SET                    -> UInt64 aliases (not the special Set)
+
+  Common text aliases:
+    VARCHAR, CHAR, TEXT, BLOB   -> String
+    SQL length parameters (e.g. VARCHAR(255)) are ignored.
+
+  Supported domain examples include IPv4 and IPv6 (listed above).
+  No user-defined domain type definitions are supported.
+  Legacy/experimental or server-specific types can vary by version.
+  Old Object('json') configurations are not the modern JSON type.
+
+
+29. PRACTICAL SQL CHECKS
+------------------------
+Exact supported type names and aliases on your running server:
+
+  SELECT name, case_insensitive, alias_to
+  FROM system.data_type_families
+  ORDER BY name;
+
+Check an expression's inferred result type:
+
+  SELECT toTypeName(toDecimal64(12.34, 2));
+
+Inspect column types in a table:
+
+  DESCRIBE TABLE database_name.table_name;
+
+  SELECT name, type
+  FROM system.columns
+  WHERE database = 'database_name' AND table = 'table_name';
